@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * @param $page pagination
+ * @return array of data. i have not time to explain, sorry. see my hard-code, thanks.
+ */
 function getImages($page){
 	global $config;
 
@@ -74,6 +78,10 @@ function getImages($page){
 	return $response;
 }
 
+/**
+ * @param $exception message for trim
+ * @return user friendly exception message, thank me later
+ */
 function trimTumblrException($exception){
 	//trim some strings for normal exception message
 	$exception = str_replace("Tumblr\API\Request", "", $exception);
@@ -83,6 +91,9 @@ function trimTumblrException($exception){
 	return $exception;
 }
 
+/**
+ * Die and return json
+ */
 function getAsJson(){
 	$images = getImages(intval($_GET['page']));
 	die(json_encode($images));
@@ -108,7 +119,10 @@ function errorView($error, $size = "s12") {
 }
 
 /**
- * @param $totalRecords
+ * @param $totalRecords how much of that shit you have?
+ * @param $currentPage where is you now?
+ * @param $perPage soo, how much do you want?
+ * @param $maxPages now i reached limit of my imagination, derp
  * @return string
  */
 function createLinks($totalRecords, $currentPage, $perPage, $maxPages = 4){
@@ -141,6 +155,10 @@ function createLinks($totalRecords, $currentPage, $perPage, $maxPages = 4){
         return $output;
 }
 
+/**
+ * @param $page page to create link with
+ * @return url string with queries
+ */
 function buildQueryString($page){
         $get = $_GET;
         $get['page'] = $page;
@@ -148,6 +166,9 @@ function buildQueryString($page){
         return $queryString = '?' . $queryString;
 }
 
+/**
+ * @return url string with queries and enabled reversed mode
+ */
 function getReversedQueryString(){
         $get = $_GET;
         $get['reversed'] = "true";
