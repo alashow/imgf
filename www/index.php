@@ -5,7 +5,7 @@
 
 	$blog = $_REQUEST['blog'];
 
-	if ($blog) {
+	if (isset($blog)) {
 		$config['blog'] = $blog;
 	}
 
@@ -23,7 +23,7 @@
 		<title><?=$config['page_title']?></title>
 		<link rel="stylesheet" href="/css/materialize.min.css">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link rel="stylesheet" href="/css/style.min.css?v=1.0.0">
+		<link rel="stylesheet" href="/css/style.min.css?v=1.0.1">
 		<link rel="stylesheet" href="http://photoswipe.com/dist/photoswipe.css?v=4.1.0-1.0.4">
 		<link rel="stylesheet" href="http://photoswipe.com/dist/default-skin/default-skin.css?v=4.1.0-1.0.4">
 	</head>
@@ -44,36 +44,46 @@
 						$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 
 						$data = getImages($page - 1);
-						$lastPage = ceil($data['total_count'] / $data['requested_count']);
+
+						$total = $data['total_count'];
+						$perPage = $data['requested_count'];
+
+						$lastPage = ceil($total / $perPage);
+						
+						$lastPageLink = buildQueryString($lastPage);
+						$reversedLink = getReversedQueryString();
+						$blogLink = "http://". $config['blog'] . ".tumblr.com";
+
 						$images = $data['images'];
 
 						if (!empty($images)) {?>
 							<div class="row">
 								<div class="col s12">
-									<a href="<?=getReversedQueryString()?>" class="waves-effect waves-light btn grey darken-2 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Reversed pagination">Reversed</a>
+									<a href="<?=$$reversedLink?>" class="waves-effect waves-light btn grey darken-2 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Reversed pagination">Reversed</a>
+									<a href="<?=$lastPageLink?>" class="waves-effect waves-light btn grey darken-2 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Navigate to last page">Last Page</a>
 									<a id="anotherBlog" class="waves-effect waves-light btn grey darken-2 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Switch to another blog">Another Blog</a>
-									<a href="<?=buildQueryString($lastPage)?>" class="waves-effect waves-light btn grey darken-2 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Navigate to last page">Last Page</a>
 								</div>
 							</div>
-							<h5><a class="grey-text text-darken-2" href="http://<?=$config['blog']?>.tumblr.com" targe="_blank"><?=$data['title']?></a></h5>	
+							<h5><a href="<?=$blogLink?>" target="_blank" class="grey-text text-darken-2 tooltipped" data-position="top" data-delay="50" data-tooltip="Open blog owner page"><?=$data['title']?></a></h5>	
 							<div class="gallery">
 								<?foreach ($images as $image) {?>
 									<a href="<?=$image['src']?>" data-size="<?=$image['width']?>x<?=$image['height']?>">
 										<img src="<?=$image['src']?>" />
+										<figure><?=$image['caption']?></figure>
 									</a>
 								<?}
 								?>
 							</div>
+						<?if($lastPage > 1){?>
+							<div class="col s8">
+								<?=createLinks($total, $page, $perPage)?>
+							</div>
+						<?}
+						} else {
+							errorView($data['error_message']);
+						}?>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col s5 offset-s5">
-						<?=createLinks($data['total_count'], $page, $data['requested_count'])?>
-					</div>
-				</div>
-				<?} else {
-					errorView($data['error_message']);
-				}?>
 				<div id="footer" class="section">
 					© 2015 <a class="grey-text text-darken-2" href="http://alashov.com" target="_blank">by Alashov</a>
 				</div>
@@ -91,10 +101,10 @@
 				<div class="pswp__ui pswp__ui--hidden">
 					<div class="pswp__top-bar">
 						<div class="pswp__counter"></div>
-						<button class="pswp__button pswp__button--close" title="Ýap (Esc)"></button>
-						<button class="pswp__button pswp__button--share" title="Paýlaş"></button>
-						<button class="pswp__button pswp__button--fs" title="Doly ekran et"></button>
-						<button class="pswp__button pswp__button--zoom" title="Ulalt/kiçelt"></button>
+						<button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+						<button class="pswp__button pswp__button--share" title="Share"></button>
+						<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+						<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
 						<div class="pswp__preloader">
 							<div class="pswp__preloader__icn">
 								<div class="pswp__preloader__cut">
@@ -107,8 +117,8 @@
 						<div class="pswp__share-tooltip">
 						</div>
 					</div>
-					<button class="pswp__button pswp__button--arrow--left" title="Öňki"></button>
-					<button class="pswp__button pswp__button--arrow--right" title="Indiki"></button>
+					<button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)"></button>
+					<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button>
 					<div class="pswp__caption">
 						<div class="pswp__caption__center">
 						</div>

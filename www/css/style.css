@@ -68,6 +68,10 @@ nav .nav-wrapper i {
   height: auto
 }
 
+.gallery figure {
+  display: none;
+}
+
 @media (max-width:800px) {
   .gallery {
     -moz-column-count: 2;

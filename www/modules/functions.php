@@ -22,6 +22,7 @@ function getImages($page){
 	}
 
 	$options['type'] = "photo";
+	$options['filter'] = "text";
 	$options['limit'] = $count;
 	
 	if ($reversed) {
@@ -51,7 +52,7 @@ function getImages($page){
 		if ($photos) {
 			foreach ($photos as $photo) {
 				$image = $photo->original_size;
-				array_push($images, array("src" => $image->url, "width" => $image->width, "height" => $image->height));
+				array_push($images, array("caption" => $post->caption, "src" => $image->url, "width" => $image->width, "height" => $image->height));
 			}
 		}
 	}
@@ -80,11 +81,6 @@ function trimTumblrException($exception){
 function getAsJson(){
 	$images = getImages(intval($_GET['page']));
 	die(json_encode($images));
-}
-
-function debugOn() {
-	error_reporting(E_ALL);
-	ini_set('display_errors', 1);
 }
 
 /**
@@ -136,7 +132,7 @@ function createLinks($totalRecords, $currentPage, $perPage, $maxPages = 4){
         $output .= '<li class="' . $nextLiClass . '"><a href="' . $nextLinkHref . '">&raquo;</a></li>';
         $output .= '</ul>';
         return $output;
-    }
+}
 
 function buildQueryString($page){
         $get = $_GET;

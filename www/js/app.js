@@ -156,7 +156,7 @@ $(document).ready(function($) {
                         captionEl.children[0].innerText = '';
                         return false;
                     }
-                    captionEl.children[0].innerHTML = item.title + '<br/><small>Surat: ' + item.author + '</small>';
+                    captionEl.children[0].innerHTML = item.title;
                     return true;
                 }
 
