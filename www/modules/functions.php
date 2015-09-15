@@ -58,9 +58,14 @@ function getImages($page){
 	}
 
 	if (empty($images)) {
-		$response['error_message'] = "Eww, there's no so much images!";
+		if ($page > 1) {
+			$response['error_message'] = "Eww, there's no so much images!";
+		} else {
+			$response['error_message'] = "There's no posts with images, sorry :(";
+		}
 	} else {
 		$response['title'] = $blog->title;
+		$response['blog_url'] = $blog->url;
 		$response['total_count'] = $data->total_posts;
 		$response['requested_count'] = $count;
 		$response['images'] = $images;
