@@ -23,14 +23,18 @@
 		<title><?=$config['page_title']?></title>
 		<link rel="stylesheet" href="/css/materialize.min.css">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link rel="stylesheet" href="/css/style.min.css?v=1.0.1">
 		<link rel="stylesheet" href="http://photoswipe.com/dist/photoswipe.css?v=4.1.0-1.0.4">
 		<link rel="stylesheet" href="http://photoswipe.com/dist/default-skin/default-skin.css?v=4.1.0-1.0.4">
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.min.css" />
+		<link rel="stylesheet" href="/css/style.min.css?v=1.0.1">
+		<!--[if lt IE 9]>
+		  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.ie.min.css" />
+		<![endif]-->
 	</head>
 	<body>
 		<div id="wrapper">
 			<!-- Navbar -->
-			<nav class="grey darken-2" role="navigation">
+			<nav class="<?=$config['theme']?>" role="navigation">
 				<div class="nav-wrapper container">
 					<div class="nav-wrapper">
 						<a href="/" class="brand-logo"><?=$config['page_title']?></a>
@@ -59,12 +63,12 @@
 						if (!empty($images)) {?>
 							<div class="row">
 								<div class="col s12">
-									<a href="<?=$$reversedLink?>" class="waves-effect waves-light btn grey darken-2 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Reversed pagination">Reversed</a>
-									<a href="<?=$lastPageLink?>" class="waves-effect waves-light btn grey darken-2 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Navigate to last page">Last Page</a>
-									<a id="anotherBlog" class="waves-effect waves-light btn grey darken-2 tooltipped" data-position="bottom" data-delay="50" data-tooltip="Switch to another blog">Another Blog</a>
+									<a href="<?=$$reversedLink?>" class="waves-effect waves-light btn tooltipped <?=$config['theme']?>" data-position="bottom" data-delay="50" data-tooltip="Reversed pagination">Reversed</a>
+									<a href="<?=$lastPageLink?>" class="waves-effect waves-light btn tooltipped <?=$config['theme']?>" data-position="bottom" data-delay="50" data-tooltip="Navigate to last page">Last Page</a>
+									<a id="anotherBlog" class="waves-effect waves-light btn tooltipped <?=$config['theme']?>" data-position="bottom" data-delay="50" data-tooltip="Switch to another blog">Another Blog</a>
 								</div>
 							</div>
-							<h5><a href="<?=$blogLink?>" target="_blank" class="grey-text text-darken-2 tooltipped" data-position="top" data-delay="50" data-tooltip="Open blog owner page"><?=$data['title']?></a></h5>	
+							<h5><a href="<?=$blogLink?>" target="_blank" class="tooltipped <?=$config['theme_text']?>" data-position="top" data-delay="50" data-tooltip="Open blog owner page"><?=$data['title']?></a></h5>	
 							<div class="gallery">
 								<?foreach ($images as $image) {?>
 									<a href="<?=$image['src']?>" data-size="<?=$image['width']?>x<?=$image['height']?>">
@@ -85,7 +89,7 @@
 					</div>
 				</div>
 				<div id="footer" class="section">
-					© 2015 <a class="grey-text text-darken-2" href="http://alashov.com" target="_blank">by Alashov</a>
+					© 2015 <a class="<?=$config['theme_text']?>" href="http://alashov.com" target="_blank">by Alashov</a>
 				</div>
 			</div>
 		</div>
@@ -126,6 +130,11 @@
 				</div>
 			</div>
 		</div>
+		<div class="github-fork-ribbon-wrapper right-bottom">
+        <div class="github-fork-ribbon <?=$config['theme']?>">
+            <a href="https://github.com/alashow/imgf">Fork me on GitHub</a>
+        </div>
+    </div>
 		<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 		<script>if (!window.jQuery) { document.write('<script src="/js/jquery.min.js"><\/script>');}</script>
 		<script src="/js/materialize.min.js"></script>

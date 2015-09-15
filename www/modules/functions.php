@@ -107,6 +107,8 @@ function errorView($error, $size = "s12") {
  * @return string
  */
 function createLinks($totalRecords, $currentPage, $perPage, $maxPages = 4){
+		global $config;
+
         $pages = getPages($totalRecords, $perPage, $currentPage, $maxPages);
         $prevLiClass = 'prev';
         $prevLinkHref = 'javascript:void(0)';
@@ -126,7 +128,7 @@ function createLinks($totalRecords, $currentPage, $perPage, $maxPages = 4){
         $output = '<ul class="pagination">';
         $output .= '<li class="' . $prevLiClass . '"><a href="' . $prevLinkHref . '">&laquo;</a></li>';
         foreach($pages as $page) {
-            $currentClass = $page == $currentPage ? 'active current' : '';
+            $currentClass = $page == $currentPage ? "active current " . $config['theme'] : '';
             $output .= '<li class="' . $currentClass . '"><a href="' . buildQueryString($page) . '">' . $page . '</a></li>';
         }
         $output .= '<li class="' . $nextLiClass . '"><a href="' . $nextLinkHref . '">&raquo;</a></li>';

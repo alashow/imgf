@@ -41,8 +41,12 @@ nav .nav-wrapper i {
   margin: 3px
 }
 
+/*I dont't like borders..*/
+.github-fork-ribbon a {
+  border-style: none !important; 
+}
+
 .pagination li.active {
-  background-color: #616161;
   pointer-events: none;
   cursor: default;
 }
