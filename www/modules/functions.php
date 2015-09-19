@@ -12,26 +12,16 @@ function getImages($page){
 	$client = new Tumblr\API\Client();
 
 	$reversed = isset($_REQUEST['reversed']);
-	$count = $_REQUEST['count'];
 
-	if (isset($count)) {
-		$count = intval($count);
-		if ($count > 0) {
-			$count = ($count > 50) ? 50 : $count;
-		} else {
-			$count = $config['default_count'];
-		}
-	} else {
-		$count = $config['default_count'];
-	}
+	$count = $config['post_limit'];
 
+	$options['limit'] = $count;
 	$options['type'] = "photo";
 	$options['filter'] = "text";
-	$options['limit'] = $count;
-	
+
 	if ($reversed) {
 		try {	
-			$total_posts = $client->getBlogPosts($config['blog'] . ".tumblr.com", $options)->total_posts;
+			$total_posts = getTotalPosts($client, $config['blog'], $options);
 			$options['offset'] = $total_posts - (($page + 1) * $count); //yes, i didn't find other fixes..
 		} catch(Tumblr\API\RequestException $e) {
 			$response['error_message'] = trimTumblrException($e);
@@ -79,6 +69,26 @@ function getImages($page){
 }
 
 /**
+ * @param $client ready to use tumblr api client
+ * @param $blog blog domain
+ * @param $options api request options
+ * @return total posts of blog
+ */
+function getTotalPosts($client, $blog, $options){
+	global $config;
+
+	return $client->getBlogPosts($blog . ".tumblr.com", $options)->total_posts;
+}
+
+/**
+ * Die and return json
+ */
+function getAsJson(){
+	$images = getImages(intval($_GET['page']));
+	die(json_encode($images));
+}
+
+/**
  * @param $exception message for trim
  * @return user friendly exception message, thank me later
  */
@@ -92,11 +102,39 @@ function trimTumblrException($exception){
 }
 
 /**
- * Die and return json
+ * Get all photo posts of blog as json
  */
-function getAsJson(){
-	$images = getImages(intval($_GET['page']));
-	die(json_encode($images));
+function getAll(){
+	global $config;
+	
+	$client = new Tumblr\API\Client();
+
+	$options['limit'] = 50;
+	$options['type'] = "photo";
+	$options['filter'] = "text";
+
+	$config['post_limit'] = $options['limit'];
+
+	$total = getTotalPosts($client, $config['blog'], $options);
+	$response["images"] = array();
+
+	for ($i=0; $i < ceil($total / $options['limit']); $i++) { 
+		$data = getImages($i);
+
+		$response['images'] = array_merge($response['images'], $data['images']);
+	}
+
+
+	$onlyUrl = isset($_REQUEST['onlyUrl']); 
+
+	if ($onlyUrl) {
+		foreach ($response['images'] as $image) {
+			echo $image['src'] . "\r\n";
+		}
+		die;
+	} else {
+		die(json_encode($response));
+	}
 }
 
 /**

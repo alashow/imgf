@@ -8,8 +8,21 @@
 		$config['blog'] = $blog;
 	}
 
+	$count = $_REQUEST['count'];
+
+	if (isset($count)) {
+		$count = intval($count);
+		if ($count > 0) {
+			$config['post_limit'] = ($count > 50) ? 50 : $count;
+		}
+	}
+
 	if (isset($_REQUEST['asJson'])) {
 		getAsJson();
+	} 
+
+	if (isset($_REQUEST['getAll'])) {
+		getAll();
 	}
 ?>
 <!DOCTYPE html>
@@ -129,7 +142,7 @@
 	</div>
 	<div class="github-fork-ribbon-wrapper right-bottom">
 		<div class="github-fork-ribbon <?=$config['theme']?>">
-			<a href="https://github.com/alashow/imgf">Fork me on GitHub</a>
+			<a href="https://github.com/alashow/imgf" target="_blank">Fork me on GitHub</a>
 		</div>
 	</div>
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>

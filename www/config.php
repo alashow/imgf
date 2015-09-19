@@ -3,7 +3,7 @@
 
 	$config['page_title'] = "Image Fetcher";
 	$config['blog'] = "melisica";
-	$config['default_count'] = "15";
+	$config['post_limit'] = "15";
 
 	//Redundant things..
 	$config['derp_mode'] = isset($_GET['derp_mode']); //enable it at your own risk!
@@ -28,5 +28,4 @@
 		 $config['theme'] = "grey darken-2";
 		 $config['theme_text'] = "grey-text text-darken-2";
 	}
-
 ?>
