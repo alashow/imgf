@@ -2,6 +2,7 @@
 	ini_set('display_errors', 0);
 
 	$config['page_title'] = "Image Fetcher";
+	$config['tumblr_consumer_key'] = "QK0TgoixUw3dQz0HU1wwnoLk9w2X0FDWFCF1VfvXSEM86mHyp9";
 	$config['blog'] = "melisica";
 	$config['post_limit'] = "15";
 

@@ -9,7 +9,7 @@ function getImages($page){
 
 	$images = array();
 
-	$client = new Tumblr\API\Client();
+	$client = new Tumblr\API\Client($config['tumblr_consumer_key']);
 
 	$reversed = isset($_REQUEST['reversed']);
 
@@ -107,7 +107,7 @@ function trimTumblrException($exception){
 function getAll(){
 	global $config;
 	
-	$client = new Tumblr\API\Client();
+	$client = new Tumblr\API\Client($config['tumblr_consumer_key']);
 
 	$options['limit'] = 50;
 	$options['type'] = "photo";
