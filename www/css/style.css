@@ -41,7 +41,7 @@ nav .nav-wrapper i {
   margin: 3px
 }
 
-/*I dont't like borders..*/
+/*i dont't like borders..*/
 .github-fork-ribbon a {
   border-style: none !important; 
 }
@@ -69,6 +69,7 @@ nav .nav-wrapper i {
 
 .gallery img {
   max-width: 100%;
+  padding: 1.5px;
   height: auto
 }
 

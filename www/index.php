@@ -41,7 +41,7 @@
 		<!--[if lt IE 9]>
 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.ie.min.css" />
 		<![endif]-->
-		<link rel="stylesheet" href="/css/style.min.css?v=1.0.1">
+		<link rel="stylesheet" href="/css/style.min.css?v=1.0.3">
 	</head>
 	<body>
 		<div id="wrapper">

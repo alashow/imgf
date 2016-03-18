@@ -237,5 +237,5 @@ function getPages($total, $limit = null, $current = null, $adjacents = null) {
             }
         }
         return $result;
-    }
+}
 ?>

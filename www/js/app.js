@@ -1,5 +1,5 @@
 $(document).ready(function($) {
-
+    var gallery;
     var initPhotoSwipeFromDOM = function(gallerySelector) {
 
         var parseThumbnailElements = function(el) {
@@ -182,7 +182,7 @@ $(document).ready(function($) {
             options.tapToToggleControls = false;
 
             // Pass data to PhotoSwipe and initialize it
-            gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
+            var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, options);
 
             // see: http://photoswipe.com/documentation/responsive-images.html
             var realViewportWidth,
@@ -249,11 +249,11 @@ $(document).ready(function($) {
 
 
     $('#anotherBlog').on('click', function(event) {
-       newBlog = prompt("Show photos of another blog. If melisica.tumblr.com then melisica, without domain name", "melisica");
-       if (newBlog.trim().length > 0 && newBlog != null) {
+        newBlog = prompt("Show photos of another blog. If melisica.tumblr.com then melisica, without domain name", "melisica");
+        if (newBlog.trim().length > 0 && newBlog != null) {
             window.location = "/?blog=" + newBlog;
-       } else {
+        } else {
             Materialize.toast("Type valid blog domain, please!");
-       };
+        };
     });
 });
