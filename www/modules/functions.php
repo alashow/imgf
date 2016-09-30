@@ -46,7 +46,7 @@ function getImages($page){
 		if ($photos) {
 			foreach ($photos as $photo) {
 				$image = $photo->original_size;
-				array_push($images, array("caption" => $post->caption, "src" => $image->url, "width" => $image->width, "height" => $image->height));
+				array_push($images, array("caption" => $post->caption, "src" => str_replace("http://", "https://", $image->url), "width" => $image->width, "height" => $image->height));
 			}
 		}
 	}

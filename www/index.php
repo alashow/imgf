@@ -35,8 +35,8 @@
 		<title><?=$config['page_title']?></title>
 		<link rel="stylesheet" href="/css/materialize.min.css">
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link rel="stylesheet" href="http://photoswipe.com/dist/photoswipe.css?v=4.1.0-1.0.4">
-		<link rel="stylesheet" href="http://photoswipe.com/dist/default-skin/default-skin.css?v=4.1.0-1.0.4">
+		<link rel="stylesheet" href="/pswp/photoswipe.css">
+		<link rel="stylesheet" href="/pswp/default-skin.css">
 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.min.css" />
 		<!--[if lt IE 9]>
 		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.1.1/gh-fork-ribbon.ie.min.css" />
@@ -148,8 +148,8 @@
 	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script>if (!window.jQuery) { document.write('<script src="/js/jquery.min.js"><\/script>');}</script>
 	<script src="/js/materialize.min.js"></script>
-	<script src="http://photoswipe.com/dist/photoswipe.min.js?v=4.1.0-1.0.4"></script>
-	<script src="http://photoswipe.com/dist/photoswipe-ui-default.min.js?v=4.1.0-1.0.4"></script>
+	<script src="/pswp/photoswipe.min.js"></script>
+	<script src="/pswp/photoswipe-ui-default.min.js"></script>
 	<script src="/js/app.min.js"></script>
 </body>
 </html>
