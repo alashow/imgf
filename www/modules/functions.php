@@ -199,9 +199,19 @@ function createLinks($totalRecords, $currentPage, $perPage, $maxPages = 4){
  */
 function buildQueryString($page){
         $get = $_GET;
-        $get['page'] = $page;
-        $queryString = http_build_query($get);
-        return $queryString = '?' . $queryString;
+
+        if (isset($get["blog"])) {
+        	$queryString = "/@$get[blog]";
+        	unset($get["blog"]);
+        }
+
+        $queryString .= "/page/{$page}";
+        unset($get["page"]);
+
+        if (! empty($get)) {
+        	$queryString .= "?" . http_build_query($get);
+        }
+        return $queryString;
 }
 
 /**

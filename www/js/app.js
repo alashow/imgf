@@ -251,7 +251,7 @@ $(document).ready(function($) {
     $('#anotherBlog').on('click', function(event) {
         newBlog = prompt("Show photos of another blog. If melisica.tumblr.com then melisica, without domain name", "melisica");
         if (newBlog.trim().length > 0 && newBlog != null) {
-            window.location = "/?blog=" + newBlog;
+            window.location = "/@" + newBlog;
         } else {
             Materialize.toast("Type valid blog domain, please!");
         };

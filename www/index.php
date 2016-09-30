@@ -74,7 +74,6 @@
 						if (!empty($images)) {?>
 							<div class="row">
 								<div class="col s12">
-									<a href="<?=$$reversedLink?>" class="waves-effect waves-light btn tooltipped <?=$config['theme']?>" data-position="bottom" data-delay="50" data-tooltip="Reversed pagination">Reversed</a>
 									<a href="<?=$lastPageLink?>" class="waves-effect waves-light btn tooltipped <?=$config['theme']?>" data-position="bottom" data-delay="50" data-tooltip="Navigate to last page">Last Page</a>
 									<a id="anotherBlog" class="waves-effect waves-light btn tooltipped <?=$config['theme']?>" data-position="bottom" data-delay="50" data-tooltip="Switch to another blog">Another Blog</a>
 								</div>
